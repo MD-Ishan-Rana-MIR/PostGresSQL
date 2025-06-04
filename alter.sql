@@ -20,5 +20,3 @@
 --     RENAME COLUMN email to email_name;
 
 -- SELECT * FROM person;
-
-
