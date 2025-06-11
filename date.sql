@@ -1,0 +1,39 @@
+-- Active: 1749042118135@@127.0.0.1@5432@test_db
+
+-- SELECT timezone;
+
+-- SHOW timezone;
+
+SELECT now();
+
+SHOW timezone;
+
+CREATE TABLE timeZ(
+    ts TIMESTAMP without TIME zone , tsz TIMESTAMP with TIME zone
+); 
+
+INSERT INTO timeZ VALUES('2024-01-12 10:45:00', '2024-01-12 10:45:00');
+
+SELECT * FROM timeZ;
+
+SELECT now();
+
+SELECT CURRENT_DATE;
+
+SELECT now()::DATE;
+SELECT now()::TIME;
+
+SELECT to_char(now(),'DDD');
+
+SELECT CURRENT_DATE - INTERVAL '1 year';
+
+SELECT CURRENT_DATE - INTERVAL '5 year';
+
+SELECT age(CURRENT_DATE, '2003-03-04');
+
+
+SELECT extract(DAY FROM '2025-06-02'::date);
+
+SELECT 'n'::BOOLEAN;
+SELECT 'y'::BOOLEAN;
+SELECT '0  '::BOOLEAN;
