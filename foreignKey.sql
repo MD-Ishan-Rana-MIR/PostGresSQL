@@ -1,53 +1,79 @@
--- Active: 1749042118135@@127.0.0.1@5432@test_db
-
-CREATE Table userList (
+CREATE TABLE "user" (
     id SERIAL PRIMARY KEY,
-    userName VARCHAR(30) NOT NULL
+    userName VARCHAR NOT NULL
 );
 
 CREATE TABLE post (
     id SERIAL PRIMARY KEY,
     title TEXT NOT NULL,
-    user_id INTEGER REFERENCES userList (id) 
+    userId INTEGER DEFAULT 2 REFERENCES "user"(id) ON DELETE SET DEFAULT
 );
 
-INSERT INTO
-    userList (userName)
-VALUES ('Alice'),
-    ('Bob'),
-    ('Charlie'),
-    ('David'),
-    ('Eva'),
-    ('Frank'),
-    ('Grace'),
-    ('Hannah'),
-    ('Ian'),
-    ('Jane');
-
-INSERT INTO post (title,user_id)
-VALUES
-  ('Alice first post', 1),
-  ('Bob shares an update', 2),
-  ('Charlie writes something', 2),
-  ('David posts a tutorial', 3),
-  ('Eva announces a giveaway', 3),
-  ('Frank shares news', 4),
-  ('Grace posts an opinion piece', 4),
-  ('Hannah writes about travel', 8),
-  ('Ian publishes a review', 9);
-
-  SELECT * FROM post;
-
-  INSERT INTO post(title,user_id)
-  VALUES(
-    'loreme dada',
-    NULL
-  );
-
-  ALTER TABLE post
-  ALTER COLUMN user_id SET NOT NULL;
-
-  DELETE FROM post;
 SELECT * FROM post;
-SELECT * FROM userList;  
 
+
+
+INSERT INTO
+    "user" (userName)
+VALUES ('alice123'),
+    ('bob_the_builder'),
+    ('charlie99'),
+    ('diana_queen'),
+    ('edward_dev'),
+    ('fionaCoder'),
+    ('george_777'),
+    ('hannah_smith'),
+    ('ian_tech'),
+    ('julia_rox');
+
+SELECT * FROM "user";
+
+INSERT INTO post(title,userId) VALUES
+('Learning PostgreSQL Basics', 1),
+('Advanced SQL Joins Explained', 2),
+('Creating APIs with Node.js', 3),
+('Understanding React Hooks', 4),
+('CSS Grid vs Flexbox', 5),
+('Deploying Apps on Vercel', 6),
+('Authentication with JWT', 7),
+('Intro to TypeScript', 8),
+('How to Use Docker', 9),
+('Async/Await in JavaScript', 10);
+
+SELECT * FROM post;
+
+DELETE FROM "user"
+WHERE id = 3;
+
+
+-- ALTER TABLE post alter COLUMN userId SET ON DELETE CASECADE;
+
+DROP TABLE "user";
+DROP TABLE post;
+
+
+DELETE FROM "user"
+WHERE id = 2;
+
+SELECT * FROM "user";
+SELECT * FROM post; 
+
+DELETE FROM "user"
+WHERE id = 1;
+
+SELECT * from "user";
+
+SELECT * FROM POST;
+
+
+DROP TABLE post;
+DROP TABLE "user";
+
+DELETE FROM "user"
+WHERE id = 2;
+
+
+SELECT * FROM "user";
+
+DELETE FROM "user"
+WHERE id = 1;
