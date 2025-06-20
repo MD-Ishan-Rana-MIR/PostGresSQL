@@ -251,5 +251,58 @@ LIMIT 1;
 
 SELECT * FROM employes;
 
-SELECT extract(YEAR FROM hire_date) as hireData, count(*) FROM employes
-GROUP BY hireData;
+SELECT extract(
+        YEAR
+        FROM hire_date
+    ) as hireData, count(*)
+FROM employes
+GROUP BY
+    hireData;
+
+CREATE TABLE orders (
+    order_id SERIAL PRIMARY KEY,
+    customer_id INT,
+    order_date DATE,
+    total_amount DECIMAL(10, 2)
+);
+
+INSERT INTO
+    orders (
+        order_id,
+        customer_id,
+        order_date,
+        total_amount
+    )
+VALUES (1, 101, '2022-01-05', 100.50),
+    (2, 102, '2022-01-07', 200.75),
+    (3, 101, '2022-01-08', 150.25),
+    (4, 103, '2022-01-10', 300.00),
+    (5, 102, '2022-01-15', 180.50),
+    (6, 103, '2022-01-20', 220.25),
+    (7, 101, '2022-01-25', 90.00),
+    (8, 102, '2022-01-28', 120.75),
+    (9, 103, '2022-02-01', 250.50),
+    (10, 101, '2022-02-05', 180.25);
+
+SELECT * FROM orders;
+
+SELECT
+    customer_id,
+    COUNT(*) AS total_orders,
+    SUM(total_amount) AS total_spent
+FROM orders
+GROUP BY
+    customer_id
+HAVING
+    COUNT(*) > 2;
+
+SELECT DATE_TRUNC('month', order_date) AS month, SUM(total_amount) AS total_amount
+FROM orders
+WHERE
+    EXTRACT(
+        YEAR
+        FROM order_date
+    ) = 2022
+GROUP BY
+    DATE_TRUNC('month', order_date)
+ORDER BY month;
